@@ -1,4 +1,4 @@
-package com.example.skymoviestask
+package com.example.skymoviestask.movielist
 
 data class Data(
     val genre: String,

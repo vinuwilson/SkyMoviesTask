@@ -1,4 +1,4 @@
-package com.example.skymoviestask
+package com.example.skymoviestask.movielist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

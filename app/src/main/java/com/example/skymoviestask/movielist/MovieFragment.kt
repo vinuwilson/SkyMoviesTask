@@ -1,4 +1,4 @@
-package com.example.skymoviestask
+package com.example.skymoviestask.movielist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,11 +9,13 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.skymoviestask.R
 
 class MovieFragment : Fragment() {
 
     private lateinit var viewModel: MovieViewModel
     private lateinit var viewModelFactory: MovieViewModelFactory
+    private val repository = MovieRepository()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +34,7 @@ class MovieFragment : Fragment() {
     }
 
     private fun setupViewModel() {
-        viewModelFactory = MovieViewModelFactory()
+        viewModelFactory = MovieViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[MovieViewModel::class.java]
     }
 
