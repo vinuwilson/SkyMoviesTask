@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.skymoviestask.databinding.FragmentMovieBinding
+import com.example.skymoviestask.loadImage
 
 class MyItemRecyclerViewAdapter(
     private val values: List<Data>
@@ -24,7 +25,7 @@ class MyItemRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-//        holder.movieImage.seti = item.id
+        holder.movieImage.loadImage(item.poster)
         holder.movieTitle.text = item.title
         holder.movieGenre.text = item.genre
         holder.movieYear.text = item.year
