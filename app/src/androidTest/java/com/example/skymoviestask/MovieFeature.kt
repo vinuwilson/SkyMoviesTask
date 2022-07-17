@@ -19,6 +19,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class MovieFeature :BaseUITest() {
 
     @Test
@@ -48,7 +49,7 @@ class MovieFeature :BaseUITest() {
                 isDescendantOfA(nthChildOf(withId(R.id.movie_list), 0))
             )
         )
-            .check(matches(withText("2007")))
+            .check(matches(withText("2017")))
             .check(matches(isDisplayed()))
 
         onView(

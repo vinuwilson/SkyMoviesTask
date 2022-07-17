@@ -16,9 +16,7 @@ import org.junit.Test
 import org.junit.Assert.*
 import org.mockito.Mockito.verify
 
-@ExperimentalCoroutinesApi
-
-class MovieViewModelShould : BaseUnitTest() {
+class MovieViewModelShould :BaseUnitTest() {
 
     private val repository: MovieRepository = mock()
     private val movieList = mock<MovieList>()
@@ -26,7 +24,7 @@ class MovieViewModelShould : BaseUnitTest() {
     private val exception = RuntimeException("Something went wrong")
 
     @Test
-    fun getMovieListFromRepository(): Unit = runBlocking {
+    fun getMovieListFromRepository(): Unit = runBlocking{
 
         val viewModel = mockSuccessfulCase()
 

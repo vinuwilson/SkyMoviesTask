@@ -11,7 +11,6 @@ import org.hamcrest.TypeSafeMatcher
 import org.junit.Rule
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
 open class BaseUITest {
 
     val mActivityRule = ActivityScenarioRule(MainActivity::class.java)
