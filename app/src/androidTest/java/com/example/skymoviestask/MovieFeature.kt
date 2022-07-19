@@ -1,19 +1,18 @@
 package com.example.skymoviestask
 
-import android.view.View
-import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
 import com.adevinta.android.barista.assertion.BaristaRecyclerViewAssertions.assertRecyclerViewItemCount
 import com.adevinta.android.barista.assertion.BaristaVisibilityAssertions.assertDisplayed
-import com.adevinta.android.barista.internal.matcher.DrawableMatcher.Companion.withDrawable
+import com.adevinta.android.barista.assertion.BaristaVisibilityAssertions.assertNotDisplayed
 import com.example.skymoviestask.utils.BaseUITest
-import org.hamcrest.Description
-import org.hamcrest.Matcher
-import org.hamcrest.TypeSafeMatcher
+import org.hamcrest.CoreMatchers.not
 import org.hamcrest.core.AllOf.allOf
 import org.junit.Rule
 import org.junit.Test
@@ -61,13 +60,18 @@ class MovieFeature :BaseUITest() {
             .check(matches(withText("History")))
             .check(matches(isDisplayed()))
 
-        onView(
-            allOf(
-                withId(R.id.movie_image),
-                isDescendantOfA(nthChildOf(withId(R.id.movie_list), 0))
-            )
-        )
-            .check(matches(withDrawable(R.mipmap.ic_launcher)))
-            .check(matches(isDisplayed()))
     }
+
+    @Test
+    fun displayProgressLoaderWhileFetchingMovieList(){
+        Thread.sleep(4000)
+
+        assertDisplayed(R.id.loader)
+    }
+
+    @Test
+    fun hideLoader() {
+        assertNotDisplayed(R.id.loader)
+    }
+
 }

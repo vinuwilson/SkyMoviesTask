@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SkyMoviesTask</string>
     <string name="movie_poster">Movie poster</string>
+    <string name="search">Search</string>
 </resources>

@@ -4,11 +4,11 @@ import com.example.skymoviestask.movielist.MovieList
 import com.example.skymoviestask.movielist.MovieRepository
 import com.example.skymoviestask.movielist.MovieViewModel
 import com.example.skymoviestask.utils.BaseUnitTest
+import com.example.skymoviestask.utils.captureValues
 import com.example.skymoviestask.utils.getValueForTest
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.whenever
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -49,6 +49,42 @@ class MovieViewModelShould :BaseUnitTest() {
         assertEquals(exception, viewModel.movieList.getValueForTest()!!.exceptionOrNull())
     }
 
+    @Test
+    fun showSpinnerWhileLoading() = runBlocking {
+
+        val viewModel = mockSuccessfulCase()
+
+        viewModel.loader.captureValues {
+            viewModel.movieList.getValueForTest()
+
+            assertEquals(true, values[0])
+        }
+    }
+
+   @Test
+   fun hideSpinnerAfterLoading() = runBlocking {
+
+       val viewModel = mockSuccessfulCase()
+
+       viewModel.loader.captureValues {
+           viewModel.movieList.getValueForTest()
+
+           assertEquals(false, values.last())
+       }
+   }
+
+    @Test
+    fun hideSpinnerAfterError() = runBlocking {
+
+        val viewModel = mockFailureCase()
+
+        viewModel.loader.captureValues {
+            viewModel.movieList.getValueForTest()
+
+            assertEquals(false, values.last())
+        }
+    }
+
     private fun mockSuccessfulCase(): MovieViewModel {
         runBlocking {
             whenever(repository.getMovieList()).thenReturn(
@@ -66,7 +102,6 @@ class MovieViewModelShould :BaseUnitTest() {
                 emit(Result.failure<MovieList>(exception))
             }
         )
-        val viewModel = MovieViewModel(repository)
-        return viewModel
+        return MovieViewModel(repository)
     }
 }
