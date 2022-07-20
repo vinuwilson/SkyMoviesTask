@@ -1,8 +1,8 @@
 package com.example.skymoviestask
 
-import com.example.skymoviestask.movielist.MovieList
-import com.example.skymoviestask.movielist.MovieListAPI
-import com.example.skymoviestask.movielist.MovieService
+import com.example.skymoviestask.movielist.model.MovieList
+import com.example.skymoviestask.movielist.network.MovieListAPI
+import com.example.skymoviestask.movielist.network.MovieService
 import com.example.skymoviestask.utils.BaseUnitTest
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times

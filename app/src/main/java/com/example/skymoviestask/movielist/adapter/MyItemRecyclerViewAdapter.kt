@@ -1,4 +1,4 @@
-package com.example.skymoviestask.movielist
+package com.example.skymoviestask.movielist.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.skymoviestask.databinding.FragmentMovieBinding
 import com.example.skymoviestask.loadImage
+import com.example.skymoviestask.movielist.model.Movie
 
 class MyItemRecyclerViewAdapter(
     private val values: List<Movie>

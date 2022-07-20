@@ -1,4 +1,4 @@
-package com.example.skymoviestask.movielist
+package com.example.skymoviestask.movielist.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

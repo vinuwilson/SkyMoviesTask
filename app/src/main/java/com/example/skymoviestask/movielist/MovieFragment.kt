@@ -10,6 +10,10 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.skymoviestask.R
+import com.example.skymoviestask.movielist.adapter.MyItemRecyclerViewAdapter
+import com.example.skymoviestask.movielist.model.Movie
+import com.example.skymoviestask.movielist.viwmodel.MovieViewModel
+import com.example.skymoviestask.movielist.viwmodel.MovieViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_movie_list.*
 import kotlinx.android.synthetic.main.fragment_movie_list.view.*
@@ -52,9 +56,9 @@ class MovieFragment : Fragment() {
 
     private fun observeMovieList() {
         viewModel.movieList.observe(this as LifecycleOwner) { movieList ->
-            if (movieList.getOrNull() != null) {
+            if(movieList.isNotEmpty()) {
                 search.visibility = View.VISIBLE
-                setupList(movieList.getOrNull()!!)
+                setupList(movieList)
             }
         }
     }
@@ -64,12 +68,12 @@ class MovieFragment : Fragment() {
     }
 
     private fun setupList(
-        movieList: MovieList
+        movieList: List<Movie>
     ) {
         movie_list.layoutManager =
             StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
 
-        adapter = MyItemRecyclerViewAdapter(movieList.data)
+        adapter = MyItemRecyclerViewAdapter(movieList)
 
         movie_list.adapter = adapter
     }

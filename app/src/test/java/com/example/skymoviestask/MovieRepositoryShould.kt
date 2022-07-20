@@ -1,8 +1,9 @@
 package com.example.skymoviestask
 
-import com.example.skymoviestask.movielist.MovieList
-import com.example.skymoviestask.movielist.MovieRepository
-import com.example.skymoviestask.movielist.MovieService
+import com.example.skymoviestask.movielist.db.MovieDao
+import com.example.skymoviestask.movielist.model.MovieList
+import com.example.skymoviestask.movielist.network.MovieRepository
+import com.example.skymoviestask.movielist.network.MovieService
 import com.example.skymoviestask.utils.BaseUnitTest
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
@@ -19,11 +20,12 @@ class MovieRepositoryShould : BaseUnitTest() {
     private val service : MovieService = mock()
     private val movieList = mock<MovieList>()
     private val exception = RuntimeException("Something went wrong")
+    private val movieDao: MovieDao = mock()
 
     @Test
     fun getMovieListFromService(): Unit = runBlocking {
 
-        val repository = MovieRepository(service)
+        val repository = MovieRepository(service, movieDao)
 
         repository.getMovieList()
 
@@ -35,7 +37,7 @@ class MovieRepositoryShould : BaseUnitTest() {
 
         val repository = mockSuccessfulCase()
 
-        assertEquals(movieList, repository.getMovieList().first().getOrNull())
+        assertEquals(movieList, repository.getMovieList().first())
     }
 
     @Test
@@ -43,7 +45,7 @@ class MovieRepositoryShould : BaseUnitTest() {
 
         val repository = mockFailureCase()
 
-        assertEquals(exception, repository.getMovieList().first().exceptionOrNull())
+        assertEquals(exception, repository.getMovieList().first())
     }
 
     private suspend fun mockSuccessfulCase(): MovieRepository {
@@ -53,7 +55,7 @@ class MovieRepositoryShould : BaseUnitTest() {
             }
         )
 
-        return MovieRepository(service)
+        return MovieRepository(service, movieDao)
     }
 
     private suspend fun mockFailureCase(): MovieRepository {
@@ -63,6 +65,6 @@ class MovieRepositoryShould : BaseUnitTest() {
             }
         )
 
-        return MovieRepository(service)
+        return MovieRepository(service, movieDao)
     }
 }

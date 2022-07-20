@@ -1,7 +1,8 @@
-package com.example.skymoviestask.movielist
+package com.example.skymoviestask.movielist.viwmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.skymoviestask.movielist.network.MovieRepository
 import javax.inject.Inject
 
 class MovieViewModelFactory @Inject constructor(

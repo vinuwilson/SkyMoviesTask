@@ -1,5 +1,7 @@
-package com.example.skymoviestask.movielist
+package com.example.skymoviestask.movielist.network
 
+import com.example.skymoviestask.movielist.model.MovieList
+import com.example.skymoviestask.movielist.network.MovieListAPI
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow

@@ -1,8 +1,8 @@
 package com.example.skymoviestask
 
-import com.example.skymoviestask.movielist.MovieList
-import com.example.skymoviestask.movielist.MovieRepository
-import com.example.skymoviestask.movielist.MovieViewModel
+import com.example.skymoviestask.movielist.model.Movie
+import com.example.skymoviestask.movielist.network.MovieRepository
+import com.example.skymoviestask.movielist.viwmodel.MovieViewModel
 import com.example.skymoviestask.utils.BaseUnitTest
 import com.example.skymoviestask.utils.captureValues
 import com.example.skymoviestask.utils.getValueForTest
@@ -19,8 +19,8 @@ import org.mockito.Mockito.verify
 class MovieViewModelShould :BaseUnitTest() {
 
     private val repository: MovieRepository = mock()
-    private val movieList = mock<MovieList>()
-    private val expected = Result.success(movieList)
+    private val movieList = mock<List<Movie>>()
+    private val expected = movieList
     private val exception = RuntimeException("Something went wrong")
 
     @Test
@@ -46,7 +46,7 @@ class MovieViewModelShould :BaseUnitTest() {
     fun emitErrorWhenReceiveError() = runBlocking {
         val viewModel = mockFailureCase()
 
-        assertEquals(exception, viewModel.movieList.getValueForTest()!!.exceptionOrNull())
+        assertEquals(expected, viewModel.movieList.getValueForTest())
     }
 
     @Test
@@ -99,7 +99,8 @@ class MovieViewModelShould :BaseUnitTest() {
     private suspend fun mockFailureCase(): MovieViewModel {
         whenever(repository.getMovieList()).thenReturn(
             flow {
-                emit(Result.failure<MovieList>(exception))
+//                emit(Result.failure<MovieList>(exception))
+                emit(expected)
             }
         )
         return MovieViewModel(repository)
