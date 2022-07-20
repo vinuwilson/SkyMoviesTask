@@ -9,7 +9,6 @@ import com.example.skymoviestask.movielist.db.MovieDatabase
 import com.example.skymoviestask.utils.BaseUITest
 import com.example.skymoviestask.utils.provideTestList
 import kotlinx.coroutines.runBlocking
-import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

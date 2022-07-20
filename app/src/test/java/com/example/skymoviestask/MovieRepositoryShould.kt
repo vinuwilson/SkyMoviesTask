@@ -61,7 +61,7 @@ class MovieRepositoryShould : BaseUnitTest() {
     private suspend fun mockFailureCase(): MovieRepository {
         whenever(service.fetchMovieList()).thenReturn(
             flow {
-                emit(Result.failure<MovieList>(exception))
+                emit(Result.failure(exception))
             }
         )
 
